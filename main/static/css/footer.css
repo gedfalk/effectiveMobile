@@ -1,0 +1,36 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #d0d5ff; 
+    border-top: 2px solid #8a9bff;  
+}
+
+.footer-brand {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1.13rem;
+}
+
+.icon-f {
+    width: 32px;  
+}
+
+.icon-f:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s; 
+}
+
+
+.footer-ascii {
+    text-decoration: none;
+    color: #2d3a8c;
+    font-size: 1.2rem;
+    font-weight: 600;
+}

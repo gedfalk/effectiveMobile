@@ -1,0 +1,26 @@
+{% load static %}
+<nav class="header">
+    <a href="#" class="icon-btn-hor">
+        <img src="{% static 'icons/catalogue.svg' %}" class="icon-h" alt="Каталог">
+        Каталог
+    </a>
+    
+    <div class="header-search">
+        <form action="#" method="get">
+            <input type="text" name="query">
+        </form>
+    </div>
+
+    <a href="#" class="icon-btn-vert">
+        <img src="{% static 'icons/library.svg' %}" class="icon-h" alt="Полка">
+        Полка
+    </a>
+    <a href="#" class="icon-btn-vert">
+        <img src="{% static 'icons/scales.svg' %}" class="icon-h" alt="Обмен">
+        Обмен
+    </a>
+    <a href="#" class="icon-btn-vert">
+        <img src="{% static 'icons/house.svg' %}" class="icon-h" alt="Войти">
+        Войти
+    </a>
+</nav>

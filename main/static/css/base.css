@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.content {
+    flex: 1;
+}
+
+
+a {
+    color: #2d3a8c;
+    transition: 0.3s;
+  }
+
+a:hover {
+    color: #536dfe;
+}
+
