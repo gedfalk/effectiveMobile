@@ -7,6 +7,14 @@
 
 {% block content %}
 <div class="item-list">
+    {%if request.user.is_authenticated %}
+        <a href="#" class="card-link">
+            <div class="item-card add-item-plus">
+                <span>+</span>
+                <span class="add-item-text">Добавить товар</span>
+            </div>
+        </a>
+    {% endif %}
     {% for item in items %}
         {% include 'items/card.html' %}
     {% empty %}
