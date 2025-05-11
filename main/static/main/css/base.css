@@ -23,3 +23,8 @@ a {
 a:hover {
   color: #536dfe;
 }
+
+h2 {
+  text-align: center;
+  color: #323840;
+}

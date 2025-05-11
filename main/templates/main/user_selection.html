@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="user-selection">
+    <h2>Выберите пользователя</h2>
+    <div class="user-grid">
+        {% for user in available_users %}
+        <a href="{% url 'switch_user' user.id %}" class="user-card">
+            <div class="user-avatar">{{ user.username|first|upper }}</div>
+            <div class="user-name">{{ user.username }}</div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

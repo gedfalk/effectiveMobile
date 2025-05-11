@@ -1,0 +1,58 @@
+.user-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #2d3a8c;
+    border-radius: 10px;
+}
+
+.user-link:hover {
+    background: #d0d5ff;
+}
+
+.user-selection {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 1rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.user-card:hover {
+    background: #f8f9ff;
+    transform: translateY(-3px);
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #d0d5ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #4c51bf;
+    margin-bottom: 0.5rem;
+}
