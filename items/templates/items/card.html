@@ -1,0 +1,27 @@
+<a href="#" class="card-link">
+    <div class="item-card">
+      <div class="item-image">
+        {% if item.image %}
+          <img src="{{ item.image.url }}" alt="{{ item.title }}">
+        {% else %}
+          <div class="image-placeholder">No Image</div>
+        {% endif %}
+      </div>
+      
+      <div class="card-content">
+        <h3>{{ item.title }}</h3>
+        
+        <p class="description">{{ item.description }}</p>
+        
+        <div class="meta-tags">
+          <span class="category">{{ item.category.name }}</span>
+          <span class="condition {{ item.condition }}">{{ item.get_condition_display }}</span>
+        </div>
+      </div>
+      
+      <div class="card-footer">
+        <span>{{ item.user.username }}</span>
+        <span>{{ item.created_at|date:"M d, Y" }}</span>
+      </div>
+    </div>
+  </a>

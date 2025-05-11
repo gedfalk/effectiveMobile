@@ -1,11 +1,16 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block title %}
     Домашняя страница
 {% endblock %}
 
 {% block content %}
-    <div class="content">
-        <h2>Тестовое задание Effective Mobile</h2>
-    </div>
+<div class="item-list">
+    {% for item in items %}
+        {% include 'items/card.html' %}
+    {% empty %}
+        <p class="no-items">No items available yet.</p>
+    {% endfor %}
+</div>
 {% endblock%}
