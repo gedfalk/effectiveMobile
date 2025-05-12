@@ -1,0 +1,20 @@
+.success-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.success-item {
+    margin: 2rem auto;
+    max-width: 300px;
+}
+
+.success-container h2 {
+    color: rgb(112, 213, 110);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -11,7 +11,8 @@ def add_item(request):
             item = form.save(commit=False)
             item.user = request.user
             item.save()
-            return redirect('index')
+            # return redirect('index')
+            return render(request, 'items/success.html', {'item': item})
     else:
         form = ItemForm()
 
