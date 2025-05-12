@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    Добавить товар
+{% endblock %}
+
+{% block content %}
+    <h3>Добавить товар</h3>
+    {% csrf_token %}
+    {{ form.title }}
+    {{ form.description }}
+    {{ form.category }}
+    {{ form.condition }}
+    {{ form.image }}
+{% endblock%}
