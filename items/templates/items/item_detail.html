@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="item-detail-container">
+    <div class="item-image-container">
+        {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.title }}">
+        {% else %}
+            <div class="no-image">No Image Available</div>
+        {% endif %}
+    </div>
+
+    <div class="item-info">
+        <div class="item-content">
+            <h1 class="item-title">{{ item.title }}</h1>
+            <p class="item-description">{{ item.description }}</p>
+            
+            <div class="item-meta">
+                <span class="item-category">{{ item.category.name }}</span>
+                <span class="item-condition">{{ item.get_condition_display }}</span>
+            </div>
+        </div>
+
+        <div class="item-footer">
+            <span>Posted by {{ item.user.username }}</span>
+            <span>{{ item.created_at|date:"F j, Y" }}</span>
+        </div>
+
+        {% if request.user == item.user %}
+        <div class="owner-actions">
+            <a href="{% url 'edit_item' item.pk %}" class="action-btn edit-btn">Редактировать</a>
+            <a href="{% url 'delete_item' item.pk %}" class="action-btn delete-btn">Удалить</a>
+        </div>
+        {% else %}
+        <div class="owner-actions">
+            <a href="#" class="action-btn edit-btn">Торг</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

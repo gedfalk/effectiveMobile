@@ -1,7 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from .models import Item
 from .forms import ItemForm
 
+
+def item_detail(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    is_owner = request.user == item.user
+    return render(request, 'items/item_detail.html', {
+        'item': item,
+        'is_owner': is_owner
+    })
 
 @login_required
 def add_item(request):
@@ -19,3 +28,4 @@ def add_item(request):
     return render(request, 'items/add_item.html', {
         'form': form
     })
+

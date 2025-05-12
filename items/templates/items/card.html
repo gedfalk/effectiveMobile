@@ -1,4 +1,4 @@
-<a href="#" class="card-link">
+<a href="{% url 'item_detail' pk=item.pk %}" class="card-link">
     <div class="item-card">
       <div class="item-image">
         {% if item.image %}

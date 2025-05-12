@@ -1,0 +1,116 @@
+.item-detail-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #e7e9fe;
+    border: 1px solid #d0d5ff;
+    border-radius: 8px;
+    box-shadow: 4px 4px 4px rgba(111, 132, 255, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    min-height: 60vh;
+}
+
+.item-image-container {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8fafc;
+    border: 1px solid #d0d5ff;
+}
+
+.item-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.item-content {
+    flex-grow: 1;
+}
+
+.item-title {
+    color: #4c51bf;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.8rem;
+}
+
+.item-description {
+    color: #2d3748;
+    line-height: 1.6;
+}
+
+.item-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.item-meta span {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.item-category {
+    background: #f0f5ff;
+    color: #3b46c3;
+}
+
+.item-condition {
+    background: #f0fff4;
+    color: #38a169;
+}
+
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid #d0d5ff;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.owner-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.action-btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.edit-btn {
+    background: #6a70e5;
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #3b46c3;
+}
+
+.delete-btn {
+    background: #e53e3e;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #c53030;
+}
