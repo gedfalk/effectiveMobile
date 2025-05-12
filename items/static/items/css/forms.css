@@ -8,6 +8,10 @@
     box-shadow: 4px 4px 4px rgba(111, 132, 255, 0.1);
 }
 
+.for-edit {
+    margin: 0;
+}
+
 .form-title {
     color: #4c51bf;
     text-align: center;

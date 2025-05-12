@@ -6,42 +6,73 @@
 {% endblock %}
 
 {% block content %}
-<div class="form-container">
-    <h2 class="form-title">Редактировать товар</h2>
-    <form method="post" enctype="multipart/form-data" class="item-form">
-        {% csrf_token %}
-        
-        <div class="form-group">
-            <label for="{{ form.title.id_for_label }}">Название</label>
-            {{ form.title }}
-        </div>
-        
-        <div class="form-group">
-            <label for="{{ form.description.id_for_label }}">Описание</label>
-            {{ form.description }}
-        </div>
-        
-        <div class="form-grid">
+<div class="item-detail-container">
+    <div class="item-image-container">
+        {% if item.image %}
+            <img id="image-preview" src="{{ item.image.url }}" alt="{{ item.title }}">
+        {% else %}
+            <!-- <div class="no-image">No Image</div> -->
+
+            <img id="image-preview" src="{% static 'images/placeholder.png' %}" alt="No image"> 
+        {% endif %}
+    </div>
+
+    <div class="form-container for-edit">
+        <h2 class="form-title">Редактировать товар</h2>
+        <form method="post" enctype="multipart/form-data" class="item-form">
+            {% csrf_token %}
+            
             <div class="form-group">
-                <label for="{{ form.category.id_for_label }}">Категория</label>
-                {{ form.category }}
+                <label for="{{ form.title.id_for_label }}">Название</label>
+                {{ form.title }}
             </div>
             
             <div class="form-group">
-                <label for="{{ form.condition.id_for_label }}">Состояние</label>
-                {{ form.condition }}
+                <label for="{{ form.description.id_for_label }}">Описание</label>
+                {{ form.description }}
             </div>
-        </div>
-        
-        <div class="form-group file-upload">
-            <label for="{{ form.image.id_for_label }}">Фото</label>
-            {{ form.image }}
-        </div>
-        
-        <div class="form-actions">
-            <button type="submit" class="submit-btn">Редактировать</button>
-            <a href="{% url 'index' %}" class="cancel-btn">Назад</a>
-        </div>
-    </form>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="{{ form.category.id_for_label }}">Категория</label>
+                    {{ form.category }}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.condition.id_for_label }}">Состояние</label>
+                    {{ form.condition }}
+                </div>
+            </div>
+            
+            <div class="form-group file-upload">
+                <label for="{{ form.image.id_for_label }}">Фото</label>
+                {{ form.image }}
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Редактировать</button>
+                <a href="{% url 'index' %}" class="cancel-btn">Назад</a>
+            </div>
+        </form>
+    </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.querySelector('input[type="file"][name="image"]');
+        const preview = document.getElementById('image-preview');
+        if (input && preview) {
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    preview.src = URL.createObjectURL(file);
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}
+
+
+
