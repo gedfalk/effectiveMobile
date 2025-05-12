@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('condition', models.CharField(choices=[('new', 'Новый'), ('used', 'б/у')], max_length=20, verbose_name='Состояние')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')),
                 ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='items.category', verbose_name='Категория')),
-                ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь')),
             ],
             options={
                 'verbose_name': 'Товар',

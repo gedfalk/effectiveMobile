@@ -15,7 +15,7 @@ class Item(models.Model):
         ('used', 'б/у'),
     ]
 
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     title = models.CharField(max_length=100, verbose_name='Название товара')
     description = models.TextField(verbose_name='Описание товара')
     # image_url

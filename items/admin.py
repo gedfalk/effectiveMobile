@@ -7,5 +7,5 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('user_id', 'title', 'category', 'condition', 'created_at')
+    list_display = ('user', 'title', 'category', 'condition', 'created_at')
 

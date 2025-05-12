@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 
 def index(request):
-    items = Item.objects.select_related('user_id', 'category').all().order_by('created_at')
+    items = Item.objects.select_related('user', 'category').all().order_by('created_at')
     context = {'items': items}
     return render(request, 'main/index.html', context)
 
@@ -14,7 +14,7 @@ def user_selection(request):
         'available_users': User.objects.all()
     })
 
-def switch_user(request, user_id):
-    user = User.objects.get(id=user_id)
+def switch_user(request, user):
+    user = User.objects.get(id=user)
     login(request, user)
     return redirect('index')

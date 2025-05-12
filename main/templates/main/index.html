@@ -17,8 +17,6 @@
     {% endif %}
     {% for item in items %}
         {% include 'items/card.html' %}
-    {% empty %}
-        <p class="no-items">No items available yet.</p>
     {% endfor %}
 </div>
 {% endblock%}
