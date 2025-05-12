@@ -29,8 +29,22 @@ def add_item(request):
         'form': form
     })
 
+@login_required
 def edit_item(request, pk):
-    pass
+    item = get_object_or_404(Item, pk=pk, user=request.user)
+
+    if request.method == 'POST':
+        form = ItemForm(request.POST, request.FILES, instance=true)
+        if form.is_valid():
+            form.save()
+            return redirect('item_detail', pk=item.pk)
+    else:
+        form = ItemForm(instance=item)
+    
+    return render(request, 'items/edit_item.html', {
+        'form': form,
+        'item': item
+    })
 
 @login_required
 def delete_item(request, pk):

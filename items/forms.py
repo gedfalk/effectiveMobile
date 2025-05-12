@@ -21,6 +21,7 @@ class ItemForm(forms.ModelForm):
             }),
             'condition': forms.Select(attrs={
                 'class': 'form-select',
-            })
+            }),
+            'image': forms.FileInput(),
 
         }
