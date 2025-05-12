@@ -21,7 +21,11 @@ def add_item(request):
             item.user = request.user
             item.save()
             # return redirect('index')
-            return render(request, 'items/success.html', {'item': item})
+            return render(request, 'items/success.html', {
+                'item': item,
+                'action': 'added'
+                }
+            )
     else:
         form = ItemForm()
 
@@ -34,10 +38,15 @@ def edit_item(request, pk):
     item = get_object_or_404(Item, pk=pk, user=request.user)
 
     if request.method == 'POST':
-        form = ItemForm(request.POST, request.FILES, instance=true)
+        form = ItemForm(request.POST, request.FILES, instance=item)
         if form.is_valid():
             form.save()
-            return redirect('item_detail', pk=item.pk)
+            # return redirect('item_detail', pk=item.pk)
+            return render(request, 'items/success.html', {
+                'item': item,
+                'action': 'edited'
+                }
+            )
     else:
         form = ItemForm(instance=item)
     
