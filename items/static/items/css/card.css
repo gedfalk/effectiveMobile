@@ -19,6 +19,7 @@
   border-radius: 8px;
   overflow: hidden;
   background: white;
+  min-height: 45vh;
 }
 
 .card-link:hover .item-card {

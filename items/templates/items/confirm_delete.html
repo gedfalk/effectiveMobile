@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="delete-confirm">
+    <h2>Удалить "{{ item.title }}"?</h2>
+    <p>Отменить это действие будет невозможно</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="delete-btn">Confirm Delete</button>
+        <a href="{% url 'item_detail' item.pk %}" class="cancel-btn">Cancel</a>
+    </form>
+</div>
+{% endblock %}

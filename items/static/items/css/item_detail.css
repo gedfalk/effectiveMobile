@@ -14,16 +14,33 @@
 }
 
 .item-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 8px;
     overflow: hidden;
     background: #f8fafc;
     border: 1px solid #d0d5ff;
+    min-height: 500px;
 }
 
 .item-image-container img {
     width: 100%;
     height: auto;
     display: block;
+}
+
+.no-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 500px;
+    text-align: center;
+    color: #64748b;
+    background: #f8fafc;
+    border-radius: 4px;
 }
 
 .item-info {
@@ -84,7 +101,7 @@
 
 .owner-actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: 1rem;
     margin-top: 1rem;
 }
@@ -104,6 +121,7 @@
 
 .edit-btn:hover {
     background: #3b46c3;
+    color: white;
 }
 
 .delete-btn {
@@ -112,5 +130,6 @@
 }
 
 .delete-btn:hover {
-    background: #c53030;
+    background: #992323;
+    color: white;
 }

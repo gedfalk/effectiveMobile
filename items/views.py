@@ -29,3 +29,14 @@ def add_item(request):
         'form': form
     })
 
+def edit_item(request, pk):
+    pass
+
+@login_required
+def delete_item(request, pk):
+    item = get_object_or_404(Item, pk=pk, user=request.user)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('index')
+    return render(request, 'items/confirm_delete.html', {'item': item})
+
