@@ -26,15 +26,17 @@
             <span>{{ item.created_at|date:"F j, Y" }}</span>
         </div>
 
-        {% if request.user == item.user %}
-        <div class="owner-actions">
-            <a href="{% url 'edit_item' item.pk %}" class="action-btn edit-btn">Редактировать</a>
-            <a href="{% url 'delete_item' item.pk %}" class="action-btn delete-btn">Удалить</a>
-        </div>
-        {% else %}
-        <div class="owner-actions">
-            <a href="#" class="action-btn edit-btn">Торг</a>
-        </div>
+        {% if request.user.is_authenticated %}
+            {% if request.user == item.user %}
+            <div class="owner-actions">
+                <a href="{% url 'edit_item' item.pk %}" class="action-btn edit-btn">Редактировать</a>
+                <a href="{% url 'delete_item' item.pk %}" class="action-btn delete-btn">Удалить</a>
+            </div>
+            {% else %}
+            <div class="owner-actions">
+                <a href="#" class="action-btn edit-btn">Торг</a>
+            </div>
+            {% endif %}
         {% endif %}
     </div>
 </div>
