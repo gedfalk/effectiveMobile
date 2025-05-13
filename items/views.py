@@ -1,12 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Item
+from .models import Item, Category
 from .forms import ItemForm
 
 
-def catalogue(request):
+def catalogue(request, category_id=None):
     items = Item.objects.all().order_by('-created_at')
-    context = {'items': items}
+    categories = Category.objects.all()
+
+    if category_id:
+        category = get_object_or_404(Category, id=category_id)
+        items = items.filter(category=category)
+
+    context = {
+        'items': items,
+        'categories': categories,
+        'current_category': category_id
+    }
     return render(request, 'items/catalogue.html', context)
 
 def item_detail(request, pk):

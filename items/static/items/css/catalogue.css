@@ -1,0 +1,26 @@
+.category-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #d0d5ff;
+    justify-content: center;
+}
+
+.category-link {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    background: #f0f2ff;
+    color: #4c51bf;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.category-link:hover {
+    background: #d0d5ff;
+}
+
+.category-link.active {
+    background: #4c51bf;
+    color: white;
+}
