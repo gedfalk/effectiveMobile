@@ -4,6 +4,11 @@ from .models import Item
 from .forms import ItemForm
 
 
+def catalogue(request):
+    items = Item.objects.all().order_by('-created_at')
+    context = {'items': items}
+    return render(request, 'items/catalogue.html', context)
+
 def item_detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
     is_owner = request.user == item.user

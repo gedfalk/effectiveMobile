@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block title %}
-    Домашняя страница
+    Моя полка
 {% endblock %}
 
 {% block content %}
-<h2>Добро пожаловать!</h2>
+<h2>Каталог товаров</h2>
 <div class="item-list">
     {% for item in items %}
         {% include 'items/card.html' %}

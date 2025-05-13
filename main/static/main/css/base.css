@@ -27,4 +27,6 @@ a:hover {
 h2 {
   text-align: center;
   color: #323840;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }

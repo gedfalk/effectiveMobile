@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    Моя полка
+{% endblock %}
+
+{% block content %}
+<h2>Ваши товары</h2>
+<div class="item-list">
+        <a href="{% url 'add_item' %}" class="card-link">
+            <div class="item-card add-item-plus">
+                <span>+</span>
+                <span class="add-item-text">Добавить товар</span>
+            </div>
+        </a>
+    {% for item in items %}
+        {% include 'items/card.html' %}
+    {% endfor %}
+</div>
+{% endblock%}
