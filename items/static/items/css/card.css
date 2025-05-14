@@ -20,6 +20,7 @@
   overflow: hidden;
   background: white;
   min-height: 45vh;
+  max-height: 60vh;
 }
 
 .card-link:hover .item-card {

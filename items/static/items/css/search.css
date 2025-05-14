@@ -41,6 +41,12 @@
     background-color: #e9ecef;
 }
 
+.filter-link.active {
+    background-color: #4c51bf;
+    color: white;
+    font-weight: bold;
+}
+
 .content-area {
     flex: 1;
     max-width: calc(100% - 300px);

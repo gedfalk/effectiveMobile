@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+from django.db.models import Q
 from .models import Item, Category
 from .forms import ItemForm
 
@@ -20,9 +22,50 @@ def catalogue(request, category_id=None):
     return render(request, 'items/catalogue.html', context)
 
 def search(request):
-    items = Item.objects.all()
+    items = Item.objects.none()
+    categories = Category.objects.all()
+    conditions = Item.item_condition
+    # todo: Передать в фильтр только, например, 10 самых плодовитых юзеров
+    User = get_user_model()
+    users = User.objects.all()
+
+    # накидываем все фильтры в OR, и потом компануем запрос в items
+    filters = {}
+    or_conditions = Q()
+    has_any_filter = False
+    if 'category' in request.GET:
+        filters['category'] = request.GET.getlist('category')
+        print(filters['category'])
+        or_conditions |= Q(category_id__in=filters['category'])
+        has_any_filter = True
+    if 'condition' in request.GET:
+        filters['condition'] = request.GET.getlist('condition')
+        or_conditions |= Q(condition__in=filters['condition'])
+        has_any_filter = True
+    if 'user' in request.GET:
+        filters['user'] = request.GET.getlist('user')
+        or_conditions |= Q(user_id__in=filters['user'])
+        has_any_filter = True
+
+    if has_any_filter:
+        items = Item.objects.filter(or_conditions)
+
+    # Проще передать url в контексте, потому что заниматься этим в templates - это пипец
+    # todo: НО... нужно как-то избавиться от дублей
+    current_url = '?'
+    for filter, nums in filters.items():
+        for n in nums:
+            current_url += f'{filter}={n}&'
+    current_url = current_url.rstrip('&')
+    print(current_url)
+
     context = {
         'items': items,
+        'categories': categories,
+        'conditions': conditions,
+        'users': users,
+        'filters': filters,
+        'current_url': current_url
     }
     return render(request, 'items/search.html', context)
 

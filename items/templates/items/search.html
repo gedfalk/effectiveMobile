@@ -13,26 +13,34 @@
             <div class="filter-section">
                 <h3>Категория</h3>
                 <div class="filter-links">
-                    <a href="#" class="filter-link">То</a>
-                    <a href="#" class="filter-link">И это</a>
+                    {% for category in categories %}
+                        <!-- todo: добавить active стиль, если фильтр выбран -->
+                        <a href="{{ current_url }}&category={{ category.id }}" class="filter-link">
+                            {{ category.name }}
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
 
             <div class="filter-section">
                 <h3>Состояние</h3>
                 <div class="filter-links">
-                    <a href="#" class="filter-link">Ля</a>
-                    <a href="#" class="filter-link">ля</a>
-                    <a href="#" class="filter-link">ля</a>
+                    {% for value, condition in conditions %}
+                        <a href="{{ current_url }}&condition={{ value }}" class="filter-link">
+                            {{ condition }}
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
 
             <div class="filter-section">
                 <h3>Владелец</h3>
                 <div class="filter-links">
-                    <a href="#" class="filter-link">То-</a>
-                    <a href="#" class="filter-link">по</a>
-                    <a href="#" class="filter-link">ля</a>
+                    {% for user in users %}
+                        <a href="{{ current_url }}&user={{ user.id }}" class="filter-link">
+                            {{ user }}
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
