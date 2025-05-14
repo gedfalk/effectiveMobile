@@ -35,11 +35,11 @@ def search(request):
     has_any_filter = False
     if 'category' in request.GET:
         filters['category'] = request.GET.getlist('category')
-        print(filters['category'])
         or_conditions |= Q(category_id__in=filters['category'])
         has_any_filter = True
     if 'condition' in request.GET:
         filters['condition'] = request.GET.getlist('condition')
+        print(filters['condition'])
         or_conditions |= Q(condition__in=filters['condition'])
         has_any_filter = True
     if 'user' in request.GET:
@@ -67,6 +67,7 @@ def search(request):
         'filters': filters,
         'current_url': current_url
     }
+    # print(f"request.method = {request.get_full_path()}")
     return render(request, 'items/search.html', context)
 
 def item_detail(request, pk):

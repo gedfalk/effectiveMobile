@@ -26,6 +26,7 @@
 
 .filter-links {
     display: flex;
+    gap: 0.1rem;
     flex-direction: column;
 }
 
@@ -39,11 +40,17 @@
 
 .filter-link:hover {
     background-color: #e9ecef;
+    color: #333;
 }
 
 .filter-link.active {
-    background-color: #4c51bf;
+    background-color: #7b82e1;
     color: white;
+    font-weight: bold;
+}
+
+.filter-link.active:hover {
+    background-color: #5a62d9;
     font-weight: bold;
 }
 
