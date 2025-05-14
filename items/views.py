@@ -6,22 +6,25 @@ from .models import Item, Category
 from .forms import ItemForm
 from .utils import delete_double
 
-def catalogue(request, category_id=None):
-    items = Item.objects.all().order_by('-created_at')
-    categories = Category.objects.all()
-
-    if category_id:
-        category = get_object_or_404(Category, id=category_id)
-        items = items.filter(category=category)
-
-    context = {
-        'items': items,
-        'categories': categories,
-        'current_category': category_id
-    }
-    return render(request, 'items/catalogue.html', context)
-
 def search(request):
+    pass
+
+# def catalogue(request, category_id=None):
+#     items = Item.objects.all().order_by('-created_at')
+#     categories = Category.objects.all()
+
+#     if category_id:
+#         category = get_object_or_404(Category, id=category_id)
+#         items = items.filter(category=category)
+
+#     context = {
+#         'items': items,
+#         'categories': categories,
+#         'current_category': category_id
+#     }
+#     return render(request, 'items/catalogue.html', context)
+
+def catalogue(request):
     items = Item.objects.none()
     categories = Category.objects.all()
     conditions = Item.item_condition
@@ -30,6 +33,7 @@ def search(request):
     users = User.objects.all()
 
     # накидываем все фильтры в OR, и потом компануем запрос в items
+    # параллельно деактивируем фильтры, если они были активированы
     filters = {}
     or_conditions = Q()
     has_any_filter = False
@@ -59,26 +63,6 @@ def search(request):
             current_url += f'{filter}={n}&'
     current_url = current_url.rstrip('&')
 
-    # print(f"url BEFORE: {current_url}")
-    # # это костыль - сразу говорю. Но нужно как-то убрать дубли
-    # chunks = current_url.split('&')
-    # if len(chunks) >= 2:
-    #     args = chunks[0].split('?')
-    #     args.extend(chunks[1:])
-    #     if args[-1] in args[:-1]:
-    #         double = args[-1]
-    #         args.pop(args.index(double))
-    #         args.pop(-1)
-    #         param, value = double.split('=')
-    #         print(f"filters BEFORE: {filters[param]}")
-    #         # filters[param].pop(args.index(value))
-    #         # filters[param].pop(args.index(value))
-    #         print(f"filters AFTER: {filters[param]}")
-
-    #     current_url = args[0] + '?' + '&'.join(set(args[1:]))
-
-    # print(f"url AFTER: {current_url}")
-    
     context = {
         'items': items,
         'categories': categories,
@@ -87,8 +71,7 @@ def search(request):
         'filters': filters,
         'current_url': current_url
     }
-    # print(f"request.method = {request.get_full_path()}")
-    return render(request, 'items/search.html', context)
+    return render(request, 'items/catalogue.html', context)
 
 def item_detail(request, pk):
     item = get_object_or_404(Item, pk=pk)

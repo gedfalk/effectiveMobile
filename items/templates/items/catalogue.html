@@ -6,18 +6,56 @@
 {% endblock %}
 
 {% block content %}
-<h2>Каталог товаров</h2>
-<div class="category-links">
-    {% for category in categories %}
-        <a href="{% url 'catalogue_by_category' category.id %}" 
-           class="category-link {% if current_category == category.id %}active{% endif %}">
-            {{ category.name }}
-        </a>
-    {% endfor %}
-</div>
-<div class="item-list">
-    {% for item in items %}
-        {% include 'items/card.html' %}
-    {% endfor %}
-</div>
+    <h2>Каталог товаров</h2>
+    <div class="main-container">
+        <!-- Левая колонка для поиска -->
+        <div class="sidebar">
+            <div class="filter-section">
+                <h3>Категория</h3>
+                <div class="filter-links">
+                    {% for category in categories %}
+                        <a href="{{ current_url }}&category={{ category.id }}" 
+                        class="filter-link {% if category.id|stringformat:'s' in filters.category %}active{% endif %}">
+                            {{ category.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Состояние</h3>
+                <div class="filter-links">
+                    {% for value, condition in conditions %}
+                        <a href="{{ current_url }}&condition={{ value }}" 
+                        class="filter-link {% if value|stringformat:'s' in filters.condition %}active{% endif %}">
+                            {{ condition }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Владелец</h3>
+                <div class="filter-links">
+                    {% for user in users %}
+                        <a href="{{ current_url }}&user={{ user.id }}"
+                        class="filter-link {% if user.id|stringformat:'s' in filters.user %}active{% endif %}">
+                            {{ user }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            {% if not items %}
+                <h1>&#8592; Выберите интересующие вас фильтры</h1>
+            {% endif %}
+            <div class="item-list">
+                {% for item in items %}
+                {% include 'items/card.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock%}
