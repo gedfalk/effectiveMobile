@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block title %}
-    Каталог товаров
+    Поиск товаров
 {% endblock %}
 
 {% block content %}
-    <h2>Каталог товаров</h2>
+    <h2>Поиск товаров</h2>
     <div class="main-container">
         <!-- Левая колонка для поиска -->
         <div class="sidebar">
@@ -49,7 +49,8 @@
         
         <div class="content-area">
             {% if not items %}
-                <h1>&#8592; Выберите интересующие вас фильтры</h1>
+                <h1>По вашему запросу ничего не найдено<br>
+                Попробуйте ещё раз</h1>
             {% endif %}
             <div class="item-list">
                 {% for item in items %}

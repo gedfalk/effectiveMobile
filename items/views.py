@@ -7,22 +7,18 @@ from .forms import ItemForm
 from .utils import delete_double
 
 def search(request):
-    pass
+    query = request.GET.get('query', '')
+    items = Item.objects.all()
 
-# def catalogue(request, category_id=None):
-#     items = Item.objects.all().order_by('-created_at')
-#     categories = Category.objects.all()
+    # case-insensitive почему-то не работает...
+    if query:
+        items = items.filter(Q(title__icontains=query) | Q(description__icontains=query))
 
-#     if category_id:
-#         category = get_object_or_404(Category, id=category_id)
-#         items = items.filter(category=category)
-
-#     context = {
-#         'items': items,
-#         'categories': categories,
-#         'current_category': category_id
-#     }
-#     return render(request, 'items/catalogue.html', context)
+    context = {
+        'items': items,
+        'query': query
+    }
+    return render(request, 'items/search.html', context)
 
 def catalogue(request):
     items = Item.objects.none()
