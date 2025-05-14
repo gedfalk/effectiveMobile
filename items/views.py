@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from .models import Item, Category
 from .forms import ItemForm
-
+from .utils import delete_double
 
 def catalogue(request, category_id=None):
     items = Item.objects.all().order_by('-created_at')
@@ -35,15 +35,17 @@ def search(request):
     has_any_filter = False
     if 'category' in request.GET:
         filters['category'] = request.GET.getlist('category')
+        filters['category'] = delete_double(filters['category'])
         or_conditions |= Q(category_id__in=filters['category'])
         has_any_filter = True
     if 'condition' in request.GET:
         filters['condition'] = request.GET.getlist('condition')
-        print(filters['condition'])
+        filters['condition'] = delete_double(filters['condition'])
         or_conditions |= Q(condition__in=filters['condition'])
         has_any_filter = True
     if 'user' in request.GET:
         filters['user'] = request.GET.getlist('user')
+        filters['user'] = delete_double(filters['user'])
         or_conditions |= Q(user_id__in=filters['user'])
         has_any_filter = True
 
@@ -51,14 +53,32 @@ def search(request):
         items = Item.objects.filter(or_conditions)
 
     # Проще передать url в контексте, потому что заниматься этим в templates - это пипец
-    # todo: НО... нужно как-то избавиться от дублей
     current_url = '?'
     for filter, nums in filters.items():
         for n in nums:
             current_url += f'{filter}={n}&'
     current_url = current_url.rstrip('&')
-    print(current_url)
 
+    # print(f"url BEFORE: {current_url}")
+    # # это костыль - сразу говорю. Но нужно как-то убрать дубли
+    # chunks = current_url.split('&')
+    # if len(chunks) >= 2:
+    #     args = chunks[0].split('?')
+    #     args.extend(chunks[1:])
+    #     if args[-1] in args[:-1]:
+    #         double = args[-1]
+    #         args.pop(args.index(double))
+    #         args.pop(-1)
+    #         param, value = double.split('=')
+    #         print(f"filters BEFORE: {filters[param]}")
+    #         # filters[param].pop(args.index(value))
+    #         # filters[param].pop(args.index(value))
+    #         print(f"filters AFTER: {filters[param]}")
+
+    #     current_url = args[0] + '?' + '&'.join(set(args[1:]))
+
+    # print(f"url AFTER: {current_url}")
+    
     context = {
         'items': items,
         'categories': categories,
