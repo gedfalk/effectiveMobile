@@ -19,6 +19,13 @@ def catalogue(request, category_id=None):
     }
     return render(request, 'items/catalogue.html', context)
 
+def search(request):
+    items = Item.objects.all()
+    context = {
+        'items': items,
+    }
+    return render(request, 'items/search.html', context)
+
 def item_detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
     is_owner = request.user == item.user

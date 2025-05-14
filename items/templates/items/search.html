@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    Моя полка
+{% endblock %}
+
+{% block content %}
+<h2>Поиск товаров</h2>
+
+
+
+<div class="item-list">
+    {% for item in items %}
+        {% include 'items/card.html' %}
+    {% endfor %}
+</div>
+{% endblock%}
