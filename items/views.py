@@ -6,19 +6,6 @@ from .models import Item, Category
 from .forms import ItemForm
 from .utils import delete_double
 
-def search(request):
-    query = request.GET.get('query', '')
-    items = Item.objects.all()
-
-    # case-insensitive почему-то не работает...
-    if query:
-        items = items.filter(Q(title__icontains=query) | Q(description__icontains=query))
-
-    context = {
-        'items': items,
-        'query': query
-    }
-    return render(request, 'items/search.html', context)
 
 def catalogue(request):
     items = Item.objects.none()
@@ -68,6 +55,59 @@ def catalogue(request):
         'current_url': current_url
     }
     return render(request, 'items/catalogue.html', context)
+
+def search(request):
+    query = request.GET.get('query', '')
+    if query:
+        items = Item.objects.all()
+        # case-insensitive почему-то не работает...
+        items = items.filter(Q(title__icontains=query) | Q(description__icontains=query))
+    else:
+        items = Item.objects.none()
+    categories = Category.objects.all()
+    conditions = Item.item_condition
+    User = get_user_model()
+    users = User.objects.all()
+
+    filters = {}
+    or_conditions = Q()
+    has_any_filter = False
+    if 'category' in request.GET:
+        filters['category'] = request.GET.getlist('category')
+        filters['category'] = delete_double(filters['category'])
+        or_conditions |= Q(category_id__in=filters['category'])
+        has_any_filter = True
+    if 'condition' in request.GET:
+        filters['condition'] = request.GET.getlist('condition')
+        filters['condition'] = delete_double(filters['condition'])
+        or_conditions |= Q(condition__in=filters['condition'])
+        has_any_filter = True
+    if 'user' in request.GET:
+        filters['user'] = request.GET.getlist('user')
+        filters['user'] = delete_double(filters['user'])
+        or_conditions |= Q(user_id__in=filters['user'])
+        has_any_filter = True
+
+    if has_any_filter:
+        items = Item.objects.filter(or_conditions)
+
+    current_url = '?'
+    for filter, nums in filters.items():
+        for n in nums:
+            current_url += f'{filter}={n}&'
+    current_url = current_url.rstrip('&')
+    print(f"CURRENT URL ___ {request.get_full_path()}")
+
+    context = {
+        'query': query,
+        'items': items,
+        'categories': categories,
+        'conditions': conditions,
+        'users': users,
+        'filters': filters,
+        'current_url': current_url
+    }
+    return render(request, 'items/search.html', context)
 
 def item_detail(request, pk):
     item = get_object_or_404(Item, pk=pk)

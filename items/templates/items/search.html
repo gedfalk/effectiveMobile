@@ -14,7 +14,7 @@
                 <h3>Категория</h3>
                 <div class="filter-links">
                     {% for category in categories %}
-                        <a href="{{ current_url }}&category={{ category.id }}" 
+                        <a href="{{ current_url }}&query={{ query }}&category={{ category.id }}" 
                         class="filter-link {% if category.id|stringformat:'s' in filters.category %}active{% endif %}">
                             {{ category.name }}
                         </a>
@@ -26,7 +26,7 @@
                 <h3>Состояние</h3>
                 <div class="filter-links">
                     {% for value, condition in conditions %}
-                        <a href="{{ current_url }}&condition={{ value }}" 
+                        <a href="{{ current_url }}&query={{ query }}&condition={{ value }}" 
                         class="filter-link {% if value|stringformat:'s' in filters.condition %}active{% endif %}">
                             {{ condition }}
                         </a>
@@ -38,7 +38,7 @@
                 <h3>Владелец</h3>
                 <div class="filter-links">
                     {% for user in users %}
-                        <a href="{{ current_url }}&user={{ user.id }}"
+                        <a href="{{ current_url }}&query={{ query }}&user={{ user.id }}"
                         class="filter-link {% if user.id|stringformat:'s' in filters.user %}active{% endif %}">
                             {{ user }}
                         </a>
