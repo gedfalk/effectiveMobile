@@ -1,0 +1,18 @@
+.trade {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trade h2 {
+    text-align: center;
+    margin-top: 10rem;
+    color: #830303;
+    animation: pulse 2s infinite;
+}
+  
+@keyframes pulse {
+    0% {opacity: 0.3;}
+    50% {opacity: 1;}
+    100% {opacity: 0.3;}
+  }
